@@ -1,0 +1,1237 @@
+/* Основные стили для Монкорда */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Whitney', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+:root {
+    /* Цветовая схема по умолчанию */
+    --primary-color: #5865f2;
+    --primary-hover: #4752c4;
+    --success-color: #3ba55c;
+    --danger-color: #ed4245;
+    --warning-color: #faa81a;
+    
+    /* Фон */
+    --background-primary: #36393f;
+    --background-secondary: #2f3136;
+    --background-tertiary: #202225;
+    --background-accent: #4f545c;
+    
+    /* Текст */
+    --text-normal: #dcddde;
+    --text-muted: #72767d;
+    --text-positive: #3ba55c;
+    --text-warning: #faa81a;
+    --text-danger: #ed4245;
+    --header-primary: #ffffff;
+    --header-secondary: #b9bbbe;
+    
+    /* Интерактивные элементы */
+    --interactive-normal: #b9bbbe;
+    --interactive-hover: #dcddde;
+    --interactive-active: #ffffff;
+    --interactive-muted: #4f545c;
+    
+    /* Границы */
+    --border-color: #42464d;
+    
+    /* Nitro темы */
+    --header-gradient: linear-gradient(135deg, var(--primary-color), #ff6b6b);
+    --server-gradient: linear-gradient(135deg, var(--primary-color), #4ecdc4);
+    --message-gradient: linear-gradient(135deg, rgba(88, 101, 242, 0.1), transparent);
+    --background-image: none;
+    --background-blur: 0px;
+    --background-brightness: 100%;
+    --background-size: cover;
+    
+    /* Анимации */
+    --transition: all 0.2s ease;
+}
+
+/* Cosmic тема */
+[data-theme="cosmic"] {
+    --primary-color: #9b59b6;
+    --primary-hover: #8e44ad;
+    --background-primary: #1a1a2e;
+    --background-secondary: #16213e;
+    --background-tertiary: #0f3460;
+    --text-normal: #e0e0e0;
+    --text-muted: #8b9dc3;
+    
+    --header-gradient: linear-gradient(135deg, #9b59b6, #e74c3c);
+    --server-gradient: linear-gradient(135deg, #9b59b6, #3498db);
+    --message-gradient: linear-gradient(135deg, rgba(155, 89, 182, 0.15), transparent);
+    --background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(155,89,182,0.3)"/><circle cx="60" cy="40" r="1.5" fill="rgba(52,152,219,0.3)"/><circle cx="80" cy="70" r="1" fill="rgba(231,76,60,0.3)"/><circle cx="40" cy="80" r="1.2" fill="rgba(46,204,113,0.3)"/></svg>');
+    --background-blur: 2px;
+    --background-brightness: 110%;
+}
+
+/* Forest тема */
+[data-theme="forest"] {
+    --primary-color: #27ae60;
+    --primary-hover: #219a52;
+    --background-primary: #1e3f2d;
+    --background-secondary: #2d5a3c;
+    --background-tertiary: #1a2e25;
+    --text-normal: #e8f5e8;
+    --text-muted: #81c784;
+    
+    --header-gradient: linear-gradient(135deg, #27ae60, #f1c40f);
+    --server-gradient: linear-gradient(135deg, #27ae60, #2ecc71);
+    --message-gradient: linear-gradient(135deg, rgba(39, 174, 96, 0.15), transparent);
+    --background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><path d="M50,150 Q75,100 100,150 T150,150" fill="rgba(39,174,96,0.1)"/><path d="M30,160 Q65,120 90,160 T170,160" fill="rgba(46,204,113,0.1)"/></svg>');
+    --background-blur: 1px;
+    --background-brightness: 105%;
+}
+
+/* Ocean тема */
+[data-theme="ocean"] {
+    --primary-color: #3498db;
+    --primary-hover: #2980b9;
+    --background-primary: #1a5276;
+    --background-secondary: #2874a6;
+    --background-tertiary: #154360;
+    --text-normal: #e8f4fd;
+    --text-muted: #85c1e9;
+    
+    --header-gradient: linear-gradient(135deg, #3498db, #1abc9c);
+    --server-gradient: linear-gradient(135deg, #3498db, #5dade2);
+    --message-gradient: linear-gradient(135deg, rgba(52, 152, 219, 0.15), transparent);
+    --background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120"><path d="M20,80 Q40,60 60,80 T100,80" fill="rgba(52,152,219,0.2)"/><path d="M10,90 Q35,70 70,90 T110,90" fill="rgba(26,188,156,0.2)"/></svg>');
+    --background-blur: 2px;
+    --background-brightness: 108%;
+}
+
+/* Кастомная тема */
+[data-theme="custom"] {
+    --background-image: var(--custom-bg-image, none);
+    --background-blur: var(--custom-bg-blur, 0px);
+    --background-brightness: var(--custom-bg-brightness, 100%);
+    --background-size: var(--custom-bg-size, cover);
+}
+
+body {
+    background-color: var(--background-primary);
+    color: var(--text-normal);
+    height: 100vh;
+    display: flex;
+    overflow: hidden;
+    position: relative;
+    transition: var(--transition);
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: var(--background-image);
+    background-size: var(--background-size);
+    background-position: center;
+    opacity: 0.4;
+    pointer-events: none;
+    z-index: -1;
+    filter: blur(var(--background-blur)) brightness(var(--background-brightness));
+    transition: var(--transition);
+}
+
+/* Стили для скроллбара */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--background-secondary);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--background-accent);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--text-muted);
+}
+
+/* Боковая панель серверов */
+.servers-sidebar {
+    width: 72px;
+    background-color: var(--background-tertiary);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 12px 0;
+    overflow-y: auto;
+    min-height: 100vh;
+}
+
+.server-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--server-gradient);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition);
+    color: white;
+    font-weight: 600;
+    font-size: 16px;
+    position: relative;
+    overflow: hidden;
+}
+
+.server-icon::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+}
+
+.server-icon:hover::before {
+    left: 100%;
+}
+
+.server-icon:hover {
+    border-radius: 16px;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.server-icon.active {
+    border-radius: 16px;
+    background: var(--primary-color);
+    box-shadow: 0 0 20px var(--primary-color);
+}
+
+.server-notification {
+    position: absolute;
+    top: -3px;
+    right: -3px;
+    background-color: var(--danger-color);
+    color: white;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    border: 2px solid var(--background-tertiary);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.music-icon {
+    background: linear-gradient(135deg, #1DB954, #1ed760) !important;
+}
+
+.divider {
+    width: 32px;
+    height: 2px;
+    background-color: var(--background-accent);
+    margin: 8px 0;
+    border-radius: 1px;
+}
+
+/* Панель каналов */
+.channels-sidebar {
+    width: 240px;
+    background-color: var(--background-secondary);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.server-header {
+    padding: 16px;
+    border-bottom: 1px solid var(--border-color);
+    font-weight: 600;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--header-primary);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.server-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.server-action {
+    background: none;
+    border: none;
+    color: var(--interactive-normal);
+    cursor: pointer;
+    font-size: 16px;
+    padding: 4px;
+    border-radius: 4px;
+    transition: var(--transition);
+}
+
+.server-action:hover {
+    background-color: var(--background-accent);
+    color: var(--interactive-hover);
+}
+
+.channels-category {
+    margin-top: 16px;
+    padding: 0 8px;
+}
+
+.category-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px;
+    color: var(--text-muted);
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.category-action {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 14px;
+    padding: 2px;
+    border-radius: 3px;
+    transition: var(--transition);
+}
+
+.category-action:hover {
+    color: var(--text-normal);
+    background-color: var(--background-accent);
+}
+
+.channel {
+    display: flex;
+    align-items: center;
+    padding: 6px 8px;
+    margin: 2px 0;
+    border-radius: 4px;
+    cursor: pointer;
+    color: var(--text-muted);
+    transition: var(--transition);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.channel:hover {
+    background-color: rgba(79, 84, 92, 0.32);
+    color: var(--text-normal);
+}
+
+.channel.active {
+    background-color: rgba(79, 84, 92, 0.4);
+    color: var(--text-normal);
+}
+
+.channel.unread {
+    color: var(--text-normal);
+    font-weight: 600;
+}
+
+.channel.unread::after {
+    content: '';
+    width: 8px;
+    height: 8px;
+    background-color: var(--text-normal);
+    border-radius: 50%;
+    margin-left: auto;
+}
+
+.channel-icon {
+    margin-right: 6px;
+    font-size: 16px;
+}
+
+.music-channel {
+    background: rgba(29, 185, 84, 0.1) !important;
+    color: #1DB954 !important;
+}
+
+.music-channel.active {
+    background: rgba(29, 185, 84, 0.2) !important;
+}
+
+.music-channel:hover {
+    background: rgba(29, 185, 84, 0.15) !important;
+}
+
+/* Музыкальный плеер */
+.music-player {
+    background: var(--background-secondary);
+    border-top: 1px solid var(--border-color);
+    padding: 15px;
+    position: relative;
+    z-index: 2;
+}
+
+.now-playing {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    background: rgba(29, 185, 84, 0.1);
+    border-radius: 8px;
+    margin-bottom: 15px;
+    border: 1px solid rgba(29, 185, 84, 0.2);
+}
+
+.now-playing-cover {
+    width: 50px;
+    height: 50px;
+    border-radius: 6px;
+    background: linear-gradient(135deg, #1DB954, #1ed760);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+.now-playing-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.track-title {
+    font-weight: 600;
+    color: var(--header-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 2px;
+}
+
+.track-artist {
+    font-size: 12px;
+    color: var(--text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.player-controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+    justify-content: center;
+}
+
+.control-btn {
+    background: none;
+    border: none;
+    color: var(--interactive-normal);
+    cursor: pointer;
+    font-size: 18px;
+    padding: 6px;
+    border-radius: 50%;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.control-btn:hover {
+    color: var(--primary-color);
+    background: rgba(88, 101, 242, 0.1);
+    transform: scale(1.1);
+}
+
+.control-btn.play-pause {
+    background: var(--primary-color);
+    color: white;
+    width: 36px;
+    height: 36px;
+    font-size: 14px;
+}
+
+.control-btn.play-pause:hover {
+    background: var(--primary-hover);
+    transform: scale(1.05);
+}
+
+.progress-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.progress-time {
+    font-size: 11px;
+    color: var(--text-muted);
+    min-width: 35px;
+    font-weight: 500;
+}
+
+.progress-bar {
+    flex: 1;
+    height: 4px;
+    background: var(--background-accent);
+    border-radius: 2px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: var(--transition);
+}
+
+.progress-bar:hover {
+    height: 6px;
+}
+
+.progress {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: var(--primary-color);
+    border-radius: 2px;
+    transition: width 0.1s ease;
+}
+
+.volume-control {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.volume-icon {
+    color: var(--text-muted);
+    font-size: 14px;
+    min-width: 16px;
+}
+
+.volume-bar {
+    flex: 1;
+    height: 4px;
+    background: var(--background-accent);
+    border-radius: 2px;
+    cursor: pointer;
+    position: relative;
+    transition: var(--transition);
+}
+
+.volume-bar:hover {
+    height: 6px;
+}
+
+.volume-level {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: var(--primary-color);
+    border-radius: 2px;
+    width: 70%;
+}
+
+/* Основная область сообщений */
+.messages-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--background-primary);
+    position: relative;
+}
+
+.messages-area::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--background-image);
+    background-size: var(--background-size);
+    background-position: center;
+    opacity: 0.2;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.channel-header {
+    padding: 16px;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+    background: var(--background-primary);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.channel-name {
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--header-primary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.channel-topic {
+    color: var(--text-muted);
+    font-size: 12px;
+    margin-left: 8px;
+}
+
+.channel-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.channel-action {
+    background: none;
+    border: none;
+    color: var(--interactive-normal);
+    cursor: pointer;
+    font-size: 16px;
+    padding: 6px;
+    border-radius: 4px;
+    transition: var(--transition);
+}
+
+.channel-action:hover {
+    background-color: var(--background-accent);
+    color: var(--interactive-hover);
+}
+
+.messages-container {
+    flex: 1;
+    padding: 16px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 1;
+}
+
+.message {
+    margin-bottom: 16px;
+    display: flex;
+    padding: 4px 16px;
+    position: relative;
+    animation: messageSlide 0.3s ease;
+}
+
+@keyframes messageSlide {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.message::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -16px;
+    right: -16px;
+    bottom: 0;
+    background: var(--message-gradient);
+    opacity: 0;
+    transition: var(--transition);
+    border-radius: 4px;
+}
+
+.message:hover::before {
+    opacity: 1;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--server-gradient);
+    margin-right: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    color: white;
+    font-size: 14px;
+    flex-shrink: 0;
+    cursor: pointer;
+    transition: var(--transition);
+    position: relative;
+    z-index: 2;
+}
+
+.avatar:hover {
+    transform: scale(1.05);
+}
+
+.message-content {
+    flex: 1;
+    min-width: 0;
+    position: relative;
+    z-index: 2;
+}
+
+.message-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 4px;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.username {
+    font-weight: 600;
+    color: var(--header-primary);
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.username:hover {
+    text-decoration: underline;
+}
+
+.timestamp {
+    color: var(--text-muted);
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.message-text {
+    line-height: 1.4;
+    font-size: 16px;
+    word-wrap: break-word;
+}
+
+.message-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 4px;
+    opacity: 0;
+    transition: var(--transition);
+}
+
+.message:hover .message-actions {
+    opacity: 1;
+}
+
+.message-action {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 14px;
+    padding: 4px;
+    border-radius: 4px;
+    transition: var(--transition);
+}
+
+.message-action:hover {
+    background-color: var(--background-accent);
+    color: var(--text-normal);
+}
+
+/* Область ввода сообщения */
+.message-input-container {
+    padding: 16px;
+    background-color: var(--background-secondary);
+    margin: 0 16px 16px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    position: relative;
+    z-index: 1;
+}
+
+.message-input-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.message-input-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.message-input-action {
+    background: none;
+    border: none;
+    color: var(--interactive-normal);
+    cursor: pointer;
+    font-size: 18px;
+    padding: 4px;
+    border-radius: 4px;
+    transition: var(--transition);
+}
+
+.message-input-action:hover {
+    background-color: var(--background-accent);
+    color: var(--interactive-hover);
+}
+
+.message-input {
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    color: var(--text-normal);
+    font-size: 16px;
+    outline: none;
+    resize: none;
+    max-height: 200px;
+    line-height: 1.4;
+    font-family: inherit;
+}
+
+.message-input::placeholder {
+    color: var(--text-muted);
+}
+
+.message-input-formatting {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+/* Боковые панели */
+.users-sidebar,
+.friends-panel,
+.settings-panel {
+    width: 240px;
+    background-color: var(--background-secondary);
+    padding: 16px;
+    overflow-y: auto;
+    min-height: 100vh;
+    position: relative;
+}
+
+.users-sidebar::before,
+.friends-panel::before,
+.settings-panel::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--background-image);
+    background-size: var(--background-size);
+    background-position: center;
+    opacity: 0.1;
+    pointer-events: none;
+}
+
+.users-header {
+    color: var(--text-muted);
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 16px;
+    position: relative;
+    z-index: 1;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    padding: 6px 8px;
+    margin-bottom: 2px;
+    border-radius: 4px;
+    transition: var(--transition);
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+}
+
+.user:hover {
+    background-color: rgba(79, 84, 92, 0.32);
+}
+
+.user-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--server-gradient);
+    margin-right: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    color: white;
+    font-size: 12px;
+    flex-shrink: 0;
+    position: relative;
+}
+
+.user-status {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--success-color);
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    border: 2px solid var(--background-secondary);
+}
+
+.user-status.idle {
+    background-color: var(--warning-color);
+}
+
+.user-status.dnd {
+    background-color: var(--danger-color);
+}
+
+.user-status.offline {
+    background-color: var(--text-muted);
+}
+
+.username {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* Навигация */
+.top-nav {
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    height: 48px;
+    background-color: var(--background-primary);
+    border-bottom: 1px solid var(--border-color);
+    justify-content: space-between;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    position: relative;
+    z-index: 1;
+}
+
+.nav-title {
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--header-primary);
+    background: var(--header-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 300% 300%;
+    animation: gradientShift 3s ease infinite;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.nav-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.nav-btn {
+    background: none;
+    border: none;
+    color: var(--interactive-normal);
+    cursor: pointer;
+    font-size: 14px;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: var(--transition);
+    font-weight: 500;
+}
+
+.nav-btn:hover {
+    background-color: var(--background-accent);
+    color: var(--interactive-hover);
+}
+
+.nav-btn.active {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+/* Модальные окна */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+}
+
+.modal {
+    background-color: var(--background-primary);
+    border-radius: 12px;
+    padding: 24px;
+    width: 440px;
+    max-width: 90vw;
+    max-height: 90vh;
+    overflow-y: auto;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    animation: modalAppear 0.3s ease;
+}
+
+@keyframes modalAppear {
+    from {
+        opacity: 0;
+        transform: scale(0.9) translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.modal-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    text-align: center;
+    color: var(--header-primary);
+}
+
+.file-upload-area {
+    border: 2px dashed var(--border-color);
+    border-radius: 8px;
+    padding: 40px 20px;
+    text-align: center;
+    margin: 20px 0;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.file-upload-area:hover {
+    border-color: var(--primary-color);
+    background: rgba(88, 101, 242, 0.05);
+}
+
+.file-upload-area.dragover {
+    border-color: var(--primary-color);
+    background: rgba(88, 101, 242, 0.1);
+    transform: scale(1.02);
+}
+
+.upload-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    color: var(--text-muted);
+}
+
+.music-source-tabs {
+    display: flex;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.source-tab {
+    padding: 10px 20px;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: var(--transition);
+    font-weight: 500;
+    color: var(--text-muted);
+}
+
+.source-tab:hover {
+    color: var(--text-normal);
+    background: rgba(79, 84, 92, 0.1);
+}
+
+.source-tab.active {
+    border-bottom-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.source-content {
+    display: none;
+}
+
+.source-content.active {
+    display: block;
+}
+
+.url-input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background: var(--background-secondary);
+    color: var(--text-normal);
+    margin-bottom: 15px;
+    transition: var(--transition);
+}
+
+.url-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(88, 101, 242, 0.3);
+}
+
+.btn {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.btn:hover {
+    background: var(--primary-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.btn-secondary {
+    background: var(--background-accent);
+    color: var(--text-normal);
+}
+
+.btn-secondary:hover {
+    background: var(--text-muted);
+}
+
+.btn-danger {
+    background: var(--danger-color);
+}
+
+.btn-danger:hover {
+    background: #c03537;
+}
+
+/* Утилиты */
+.hidden {
+    display: none !important;
+}
+
+.loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.online-dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--success-color);
+    border-radius: 50%;
+    margin-right: 6px;
+}
+
+/* Анимации */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.slide-in {
+    animation: slideIn 0.3s ease;
+}
+
+.fade-in {
+    animation: fadeIn 0.3s ease;
+}
+
+/* Адаптивность */
+@media (max-width: 1200px) {
+    .users-sidebar,
+    .friends-panel,
+    .settings-panel {
+        position: fixed;
+        right: 0;
+        top: 0;
+        height: 100vh;
+        z-index: 100;
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+    }
+    
+    .users-sidebar.open,
+    .friends-panel.open,
+    .settings-panel.open {
+        transform: translateX(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .channels-sidebar {
+        position: fixed;
+        left: 72px;
+        top: 0;
+        height: 100vh;
+        z-index: 90;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+    }
+    
+    .channels-sidebar.open {
+        transform: translateX(0);
+    }
+    
+    .servers-sidebar {
+        width: 60px;
+    }
+}
+
+/* Кастомные скроллбары для Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--background-accent) var(--background-secondary);
+}
